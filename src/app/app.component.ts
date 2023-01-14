@@ -1,10 +1,22 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'legt_store';
+
+  imgShower = '';
+
+
+  toggleButtom() {
+    console.log('click');
+  }
+
+
+  onLoad(event: string){
+    console.log(event);
+  }
 }

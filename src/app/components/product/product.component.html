@@ -1,0 +1,21 @@
+<div class="product--container">
+  <app-img
+    *ngIf="product.images.length > 0"
+    [img]="product.images"
+    alt="img"
+  ></app-img>
+  <div class="product--info">
+    <div>
+      <h2>
+        {{ product.price | currency : "USD" }}
+      </h2>
+      <button type="button" (click)="addToShoppingCart(product)">
+        <img src="../../../assets/svg/bt_add_to_cart.svg" alt="shopingCart" />
+      </button>
+      <button (click)="onShowDetail()">Details</button>
+      <p class="item3">
+        {{ product.title }}
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="container--img">
+  <img
+    [src]="img"
+    alt="img"
+    (load)="imgLoaded()"
+    (error)="imgError()"
+    *ngIf="img; elseImg"
+  />
+  <ng-template #elseImg>
+    <img [src]="imgDefault" alt="img for Default" />
+  </ng-template>
+</div>

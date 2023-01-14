@@ -1,0 +1,80 @@
+<div class="show-mobile">
+  <div>
+    <button (click)="toggleMenu()">☰</button>
+    <a href="">
+      <img src="./assets/svg/logo_yard_sale.svg" alt="logo" />
+    </a>
+    <img
+      src="./assets/svg/icon_shopping_cart.svg"
+      (click)="toggleShoppingCart()"
+      alt="logo"
+    />
+  </div>
+  <div>
+    <aside class="cart-product-detail" [class.cart-active]="showShoppingCart">
+      <div class="title-container">
+        <p class="title">My order</p>
+      </div>
+
+      <div class="shopping-cart">
+        <figure>
+          <img
+            src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="bike"
+          />
+        </figure>
+        <p>Bike</p>
+        <p>$30,00</p>
+        ×
+      </div>
+
+      <div class="order">
+        <p>
+          <span>Total</span>
+        </p>
+        <p>$560.00</p>
+      </div>
+
+      <button class="primary-button">Checkout</button>
+    </aside>
+  </div>
+  <aside class="side-bar" [class.active]="showMenu">
+    <div>
+      <button (click)="toggleMenu()">×</button>
+      <a href="">All</a>
+      <a href="">Clothes</a>
+      <a href="">Electronics</a>
+    </div>
+  </aside>
+</div>
+<div class="hide-mobile">
+  <div>
+    <nav>
+      <a class="logo" href="#">
+        <img src="./assets/svg/logo_yard_sale.svg" alt="logo" />
+      </a>
+      <ul>
+        <li><a href="">All</a></li>
+        <li><a href="">Clothes</a></li>
+        <li><a href="">Electronics</a></li>
+      </ul>
+    </nav>
+    <div class="info">
+      <div class="account">user@email.com</div>
+      <div class="cart" (click)="toggleShoppingCart()">
+        <img src="./assets/svg/icon_shopping_cart.svg" alt="cartNotification" />
+        <span class="counter">
+          {{ productCounter }}
+
+        </span>
+
+      </div>
+      <app-shopping-cart
+        class="cart-c"
+        [class.active-cart]="showShoppingCart"
+      >
+      </app-shopping-cart>
+    </div>
+  </div>
+</div>
+

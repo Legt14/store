@@ -1,0 +1,64 @@
+// @import url('swiper/css');
+
+.products--container {
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.container--grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.7rem;
+  gap: 1.5rem;
+}
+
+.product-detail {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: all ease-out 0.5s;
+  transform: translateX(100%);
+  overflow: visible;
+
+  .swiper-img {
+    width: 35.5rem;
+    border-radius: 10px;
+  }
+
+  &.active {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (min-width: 31.25em) and (max-width: 56.25em) {
+  .container--grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 4rem;
+  }
+}
+
+@media screen and (min-width: 56.26em) and (max-width: 64em) {
+  .container--grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 4rem;
+  }
+}
+
+@media screen and (min-width: 65em) {
+  .container--grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 4rem;
+  }
+}

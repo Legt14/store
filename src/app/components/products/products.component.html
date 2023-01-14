@@ -1,0 +1,41 @@
+<div class="container--grid">
+  <app-product
+    *ngFor="let record of productsList"
+    [product]="record"
+    (addProduct)="onAddToShoppingCart($event)"
+    (showProduct)="onShowtDetail($event)"
+  >
+  </app-product>
+</div>
+
+<aside class="product-detail" [class.active]="productToggle">
+  <div *ngIf="productChosen">
+    <button type="button" (click)="toggleProductDatail()">×</button>
+    <h3>
+      {{ productChosen.title }}
+    </h3>
+    <swiper [slidesPerView]="1">
+      <ng-template
+        swiperSlide
+        *ngFor="let record of productChosen.images"
+        class="swiper-template"
+      >
+        <img class="swiper-img" [src]="record" alt="" />
+      </ng-template>
+    </swiper>
+
+    <article>
+      <h1>
+        {{ productChosen.price | currency : "USD" }}
+      </h1>
+
+      <p>
+        {{ productChosen.category.name }}
+      </p>
+      <p>
+        {{ productChosen.description }}
+      </p>
+    </article>
+    <button (click)="deleteProduct()">Delete Product</button>
+  </div>
+</aside>

@@ -1,0 +1,23 @@
+<aside class="cart-product-detail">
+  <div class="title-container">
+    <p class="title">My order</p>
+  </div>
+
+  <div class="shopping-cart" *ngFor="let record of product">
+    <figure>
+      <img [src]="record.images" alt="record.title" />
+    </figure>
+    <p>{{ record.title }}</p>
+    <p>{{ record.price | currency : "USD" }}</p>
+    <p (click)="removeProduct(record.id)">×</p>
+  </div>
+
+  <div class="order">
+    <p>
+      <span>Total</span>
+    </p>
+    <p>{{ total.toFixed() | currency : "USD" }}</p>
+  </div>
+
+  <button class="primary-button">Checkout</button>
+</aside>
