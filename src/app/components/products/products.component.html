@@ -7,6 +7,9 @@
   >
   </app-product>
 </div>
+<button (click)="loadContent()">
+  More Content
+</button>
 
 <aside class="product-detail" [class.active]="productToggle">
   <div *ngIf="productChosen">

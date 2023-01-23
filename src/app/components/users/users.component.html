@@ -1,0 +1,75 @@
+<div class="forms">
+  <h1>Forms</h1>
+  <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+    <div class="input-group">
+      <label for="username">UserName</label>
+      <input
+        type="text"
+        name="usernameInput"
+        [(ngModel)]="createUser.name"
+        id="username"
+        placeholder="Username"
+        required
+      />
+    </div>
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="emailInput"
+        [(ngModel)]="createUser.email"
+        id="email"
+        placeholder="Email"
+        required
+      />
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="passwordInput"
+        [(ngModel)]="createUser.password"
+        id="password"
+        placeholder="Password"
+        required
+      />
+    </div>
+    <button [disabled]="registerForm.invalid" type="submit">Register</button>
+  </form>
+
+  <button (click)="allUsers()">click me</button>
+</div>
+
+<div>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <label for="LoginEmail">Email</label>
+    <input
+      type="email"
+      name="emailInput"
+      [(ngModel)]="loginUser.email"
+      id="LoginEmail"
+      placeholder="Email"
+      required
+    />
+    <label for="LoginPassword">Password</label>
+    <input
+      type="password"
+      name="passwordInput"
+      [(ngModel)]="loginUser.password"
+      id="LoginPassword"
+      placeholder="Password"
+      required
+    />
+
+    <button *ngIf="!profile; else elseBlock" (click)="login()">Login</button>
+  </form>
+  <ng-template #elseBlock>
+    {{ profile?.id}}
+    {{ profile?.name}}
+    {{ profile?.email }}
+  </ng-template>
+</div>
+<div>
+  <!-- <button *ngIf="!profile; else elseBlock" (click)="login()">Login</button>
+  <ng-template #elseBlock>{{ userInfo.email }}</ng-template> -->
+</div>

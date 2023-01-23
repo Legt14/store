@@ -16,6 +16,9 @@
       <p class="item3">
         {{ product.title }}
       </p>
+      <p>
+        {{ product.taxes | currency : "USD" }}
+      </p>
     </div>
   </div>
 </div>

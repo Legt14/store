@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreServiceService } from '../../services/store.services.service';
+import { UserLoginDTO } from 'src/app/models';
 
 
 @Component({
@@ -32,4 +33,6 @@ export class NavbarComponent implements OnInit{
    this.showShoppingCart = !this.showShoppingCart;
   console.log(this.showShoppingCart)
   }
+
+
 }

@@ -39,6 +39,7 @@
   }
 }
 
+//Tablet
 @media screen and (min-width: 31.25em) and (max-width: 56.25em) {
   .container--grid {
     display: grid;
@@ -47,7 +48,9 @@
   }
 }
 
-@media screen and (min-width: 56.26em) and (max-width: 64em) {
+
+//Tablet 2
+@media screen and (min-width: 56.26em) and (max-width: 63em) {
   .container--grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -55,7 +58,9 @@
   }
 }
 
-@media screen and (min-width: 65em) {
+
+//Desktop
+@media screen and (min-width: 64em) {
   .container--grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

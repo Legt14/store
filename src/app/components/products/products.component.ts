@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CreateProduct, Products, UpdateProduct } from '../../models';
 import { StoreServiceService } from '../../services/store.services.service';
 import { ProductsServiceService } from '../../services/products.service.service';
@@ -8,13 +8,18 @@ import { ProductsServiceService } from '../../services/products.service.service'
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   shoppingCart: Products[] = [];
   total = 0;
 
-  productsList: Products[] = [];
-
+  @Input() productsList: Products[] = [];
   productToggle = false;
+
+
+
+  status: 'loading' | 'success' | 'error' | 'init' = 'init';
+
+  @Output() onLoadContent: EventEmitter<string> = new EventEmitter<string>();
 
   productChosen: Products = {
     id: 0,
@@ -39,10 +44,25 @@ export class ProductsComponent implements OnInit {
     this.shoppingCart = storeService.getShoppingCart();
   }
 
-  ngOnInit(): void {
-    this.productService.getAllProducts().subscribe((data) => {
-      this.productsList = data;
-    });
+  // ngOnInit(): void {
+  //   this.loadContent();
+  // }
+
+  loadContent() {
+    return this.onLoadContent.emit();
+
+    // this.status = 'loading';
+    // this.productService
+    //   .getProductByPage(this.limit, this.offset)
+    //   .subscribe((data) => {
+    //     this.productsList = data;
+    //     this.offset += this.limit;
+    //     this.status = 'success';
+    //   }),
+    //   (error: any) => {
+    //     this.status = 'error';
+    //     console.log(error);
+    //   };
   }
 
   onAddToShoppingCart(product: Products): void {
@@ -51,10 +71,17 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowtDetail(id: number) {
-    this.productService.getProduct(id).subscribe((data) => {
-      this.productChosen = data;
-      this.toggleProductDatail();
-    });
+    this.status = 'loading';
+    this.productService.getProduct(id).subscribe(
+      (data) => {
+        this.productChosen = data;
+        this.toggleProductDatail();
+      },
+      (err) => {
+        this.status = 'error';
+        console.log(err);
+      }
+    );
   }
 
   createProduct(): void {
@@ -78,17 +105,17 @@ export class ProductsComponent implements OnInit {
 
     const id = this.productChosen.id;
     this.productService.update(change, id).subscribe((data) => {
-      let prod = this.productsList.findIndex(item => item.id === id)
-      this.productsList[prod] = data
+      let prod = this.productsList.findIndex((item) => item.id === id);
+      this.productsList[prod] = data;
     });
   }
 
-  deleteProduct(){
+  deleteProduct() {
     const id = this.productChosen.id;
-    this.productService.delete(id).subscribe(()=>{
-      let prodIndex = this.productsList.findIndex(item => item.id === id);
+    this.productService.delete(id).subscribe(() => {
+      let prodIndex = this.productsList.findIndex((item) => item.id === id);
       this.productsList.splice(prodIndex, 1);
       this.productToggle = false;
     });
-  };
-};
+  }
+}

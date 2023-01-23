@@ -10,6 +10,7 @@ export interface Products {
   images: string;
   description: string;
   category: Category;
+  taxes?: number;
 }
 
 export interface CreateProduct extends Omit<Products, 'id' | 'category'> {
@@ -17,3 +18,18 @@ export interface CreateProduct extends Omit<Products, 'id' | 'category'> {
 }
 
 export interface UpdateProduct extends Partial<CreateProduct> {}
+
+export interface Users {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface CreateUsersDTO extends Omit<Users, 'id'> {}
+
+export interface UserLoginDTO extends Omit<CreateUsersDTO, 'name'> {}
+
+export interface AuthToken {
+  access_token: string;
+}

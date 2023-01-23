@@ -10,10 +10,19 @@
     <header>
       <app-navbar> </app-navbar>
     </header>
+    <router-outlet></router-outlet>
+
+    <!-- <app-users></app-users>
+
+    <button (click)="downloadFile()">Download</button>
+    <input type="file" (change)="onUpload($event)" />
+    <div *ngIf="res.length === 0; else elseBlock"></div>
+    <ng-template #elseBlock>
+      {{ res }}
+    </ng-template>
 
     <app-img (loaded)="onLoad($event)" [img]="imgShower"> </app-img>
-    <app-products></app-products>
-    <i class="fa-solid fa-plus"></i>
+    <app-products></app-products> -->
   </body>
 </html>
 

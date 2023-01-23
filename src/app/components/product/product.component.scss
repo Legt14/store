@@ -6,13 +6,15 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: .5rem;
+  width: 97%;
+  height: 100%;
+  gap: 0.5rem;
+  overflow: hidden;
   .product--info {
     display: flex;
-    overflow: hidden;
     flex-direction: column;
     align-items: center;
-    height: 4.5rem;
+    height: 5.5rem;
     width: 10rem;
     div {
       display: grid;
@@ -29,8 +31,8 @@
         }
       }
     }
-    .item3{
-      grid-column: 1/ span 2;
+    .item3 {
+      grid-column: 1 / span 2;
     }
   }
   .product--info h2,
@@ -39,14 +41,13 @@
     margin: 0;
   }
 
-  .product--info h2{
+  .product--info h2 {
     font-size: 1.5rem;
   }
-  .product--info p{
+  .product--info p {
     font-size: 0.8rem;
   }
   transition: 250ms ease-out;
-
 }
 .product--container:hover {
   background-color: whitesmoke;
@@ -54,3 +55,9 @@
   transform: scale(1.12);
 }
 
+@media screen and (min-width: 20em) and (max-width: 64em) {
+  .product--container:hover {
+    box-shadow: none;
+    transform: none;
+  }
+}
