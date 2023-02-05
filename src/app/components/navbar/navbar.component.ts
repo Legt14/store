@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreServiceService } from '../../services/store.services.service';
-import { UserLoginDTO } from 'src/app/models';
-
+import { CategoriesService } from 'src/app/services/categories.service';
+import { Category } from 'src/app/models';
 
 @Component({
   selector: 'app-navbar',
@@ -10,19 +10,22 @@ import { UserLoginDTO } from 'src/app/models';
 })
 export class NavbarComponent implements OnInit{
   showMenu = false;
-
+  limit = 10
+  offset= 0
   showShoppingCart = false;
-
   productCounter = 0;
+  categories: Category[] =[];
 
   constructor(
-    private storeService: StoreServiceService
+    private storeService: StoreServiceService,
+    private category:CategoriesService
   ){}
 
   ngOnInit(): void {
     this.storeService.cart$.subscribe(record =>{
       this.productCounter = record.length;
     })
+    this.getCategories()
   }
 
   toggleMenu(): void{
@@ -33,6 +36,11 @@ export class NavbarComponent implements OnInit{
    this.showShoppingCart = !this.showShoppingCart;
   console.log(this.showShoppingCart)
   }
-
+  getCategories(){
+    this.category.getAll(this.limit, this.offset).subscribe((data)=>{
+      this.categories = data;
+      console.log(this.categories)
+    })
+  }
 
 }

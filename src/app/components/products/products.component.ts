@@ -11,6 +11,8 @@ import { ProductsServiceService } from '../../services/products.service.service'
 export class ProductsComponent {
   shoppingCart: Products[] = [];
   total = 0;
+  limit = 10;
+  offset = 0;
 
   @Input() productsList: Products[] = [];
   productToggle = false;
@@ -22,13 +24,13 @@ export class ProductsComponent {
   @Output() onLoadContent: EventEmitter<string> = new EventEmitter<string>();
 
   productChosen: Products = {
-    id: 0,
+    id: '',
     title: '',
     images: '',
     price: 0,
     description: '',
     category: {
-      id: 0,
+      id: '',
       name: '',
     },
   };
@@ -45,7 +47,10 @@ export class ProductsComponent {
   }
 
   // ngOnInit(): void {
-  //   this.loadContent();
+  //   this.productService.getAll(10, 0).subscribe((data) => {
+  //     this.productsList = data;
+  //     this.offset += this.limit;
+  //   })
   // }
 
   loadContent() {
@@ -70,7 +75,7 @@ export class ProductsComponent {
     this.total = this.storeService.getTotal();
   }
 
-  onShowtDetail(id: number) {
+  onShowtDetail(id: string) {
     this.status = 'loading';
     this.productService.getProduct(id).subscribe(
       (data) => {

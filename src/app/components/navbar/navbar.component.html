@@ -50,13 +50,11 @@
 <div class="hide-mobile">
   <div>
     <nav>
-      <a class="logo" href="#">
+      <a class="logo" [routerLink]="''">
         <img src="./assets/svg/logo_yard_sale.svg" alt="logo" />
       </a>
-      <ul>
-        <li><a href="">All</a></li>
-        <li><a href="">Clothes</a></li>
-        <li><a href="">Electronics</a></li>
+      <ul *ngFor="let record of categories">
+        <li><a [routerLink]="['/category', record.id]">{{record.name}}</a></li>
       </ul>
     </nav>
     <div class="info">

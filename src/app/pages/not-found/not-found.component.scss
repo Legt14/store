@@ -1,0 +1,14 @@
+.container{
+  height: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.8rem;
+  i{
+    transform: scale(7);
+  }
+  h1{
+    font-size: 1.6rem;
+  }
+}

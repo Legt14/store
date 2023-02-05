@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
+  HttpParams,
   HttpStatusCode,
 } from '@angular/common/http';
 import { Products, CreateProduct, UpdateProduct } from '../models';
@@ -12,34 +13,36 @@ import { catchError, retry, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ProductsServiceService {
-  private urlApi = 'https://young-sands-07814.herokuapp.com/api/products';
+  private urlApi = 'https://young-sands-07814.herokuapp.com/api/';
 
   constructor(private http: HttpClient) {}
 
+  getAll(limit: number, offset: number): Observable<Products[]>{
+    let params = new HttpParams();
+    params = params.set('limit', limit);
+    params = params.set('offset', offset);
+
+    const requestOptions = { params: params };
+
+    return this.http.get<Products[]>(`${this.urlApi}products`, requestOptions)
+    .pipe(
+      retry(3),
+      map(products => products.map(item => {
+        return {
+          ...item,
+          taxes: .19 * item.price
+        }
+      }))
+    );
+  }
+
   getAllProducts() {
-    return this.http.get<Products[]>(this.urlApi);
+    return this.http.get<Products[]>(`${this.urlApi}products`);
   }
 
-  getProductByPage(limit: number, offset: number): Observable<Products[]> {
-    return this.http
-      .get<Products[]>(`${this.urlApi}`, {
-        params: { limit, offset },
-      })
-      .pipe(
-        retry(3),
-        map((products) =>
-          products.map((item) => {
-            return {
-              ...item,
-              taxes: .16 * item.price
-            };
-          })
-        )
-      );
-  }
 
-  getProduct(id: number) {
-    return this.http.get<Products>(`${this.urlApi}/${id}`).pipe(
+  getProduct(id: string) {
+    return this.http.get<Products>(`${this.urlApi}products/${id}`).pipe(
       catchError((err: HttpErrorResponse) => {
         return this.handleErrors(err);
       })
@@ -47,15 +50,15 @@ export class ProductsServiceService {
   }
 
   create(dto: CreateProduct): Observable<Products> {
-    return this.http.post<Products>(this.urlApi, dto);
+    return this.http.post<Products>(`${this.urlApi}products`, dto);
   }
 
-  update(dto: UpdateProduct, id: number) {
-    return this.http.put<Products>(`${this.urlApi}/${id}`, dto);
+  update(dto: UpdateProduct, id: string) {
+    return this.http.put<Products>(`${this.urlApi}products/${id}`, dto);
   }
 
-  delete(id: number) {
-    return this.http.delete<Products[]>(`${this.urlApi}/${id}`);
+  delete(id: string) {
+    return this.http.delete<Products[]>(`${this.urlApi}products/${id}`);
   }
 
   handleErrors(error: HttpErrorResponse): Observable<never> {

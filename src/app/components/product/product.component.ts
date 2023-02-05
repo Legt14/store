@@ -8,19 +8,19 @@ import { Products } from '../../models';
 })
 export class ProductComponent {
   @Input() product: Products = {
-    id: 0,
+    id: '',
     title: '',
     images: '',
     price: 0,
     description: '',
     category: {
-      id: 0,
+      id: '',
       name: '',
     },
   };
 
   @Output() addProduct = new EventEmitter<Products>();
-  @Output() showProduct = new EventEmitter<number>();
+  @Output() showProduct = new EventEmitter<string>();
 
 
   addToShoppingCart(p: Products): void {

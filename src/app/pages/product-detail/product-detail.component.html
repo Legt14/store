@@ -1,0 +1,27 @@
+<div class="detail-container">
+  <section class="detail-container__content">
+    <div class="detail-container__close" (click)="goToBack()"><i class="fa-solid fa-xmark"></i></div>
+    <div class="detail-container__img-container">
+      <swiper [slidesPerView]="1">
+        <ng-template
+          swiperSlide
+          *ngFor="let img of product?.images"
+          class="swiper-template"
+        >
+          <img class="swiper-img" [src]="img" alt="" />
+        </ng-template>
+      </swiper>
+    </div>
+
+    <article class="detail-container__article">
+      <section>
+        <h1>{{ product?.price | currency : "USD" }}</h1>
+        <a href="">add</a>
+      </section>
+      <h2>{{ product?.title | titlecase }}</h2>
+      <p>
+        {{ product?.description }}
+      </p>
+    </article>
+  </section>
+</div>
